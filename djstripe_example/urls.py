@@ -16,7 +16,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 
+from .views import checkout_redirect
+
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path(
+        "checkout/redirect/<str:session_id>",
+        checkout_redirect,
+        name="checkout_redirect",
+    ),
     path("stripe/", include("djstripe.urls")),
 ]
