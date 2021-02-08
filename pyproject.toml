@@ -14,3 +14,10 @@ dj-stripe = {git = "https://github.com/dj-stripe/dj-stripe.git"}
 [build-system]
 requires = ["poetry>=0.12"]
 build-backend = "poetry.masonry.api"
+
+[tool.poetry.scripts]
+manage = "manage:main"
+makemigrations = "manage:makemigrations"
+migrate = "manage:migrate"
+start = "manage:start"
+dev = "manage:dev"
