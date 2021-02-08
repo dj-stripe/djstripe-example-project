@@ -21,3 +21,6 @@ makemigrations = "manage:makemigrations"
 migrate = "manage:migrate"
 start = "manage:start"
 dev = "manage:dev"
+
+[tool.isort]
+profile = "black"
