@@ -116,6 +116,7 @@ STATIC_URL = "/static/"
 
 # dj-stripe settings
 
+STRIPE_LIVE_MODE = False
 STRIPE_LIVE_SECRET_KEY = os.environ.get("STRIPE_LIVE_SECRET_KEY", "sk_live_XXXXXXX")
 STRIPE_TEST_SECRET_KEY = os.environ.get("STRIPE_TEST_SECRET_KEY", "sk_test_XXXXXXX")
 DJSTRIPE_WEBHOOK_SECRET = os.environ.get(
