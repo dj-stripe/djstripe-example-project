@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 
-from .views import checkout_redirect
+from .views import checkout_redirect, create_checkout_session
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -25,5 +25,6 @@ urlpatterns = [
         checkout_redirect,
         name="checkout_redirect",
     ),
+    path("checkout/create/", create_checkout_session, name="create_checkout_session"),
     path("stripe/", include("djstripe.urls")),
 ]
