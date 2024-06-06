@@ -1,2 +1,25 @@
+*.py[cod]
 __pycache__
-db.sqlite3
+.tox
+dj_stripe.egg-info
+*.mo
+
+# Environments
+.venv
+
+# mkdocs
+site/
+
+# SQLite
+*.sqlite3
+
+# Coverage
+/cover
+.coverage
+
+# Editor files
+.vscode
+.idea
+
+# Do not commit Poetry lockfiles for libraries
+poetry.lock
