@@ -6,6 +6,7 @@ dj_stripe.egg-info
 
 # Environments
 .venv
+.env
 
 # mkdocs
 site/
