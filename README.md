@@ -26,11 +26,13 @@ parent_directory/
 └── djstripe-example-project/  # djstripe example project repository
 ```
 
+3. **Create a `.env` file:**
+   Copy the `.env.dist` file to `.env` and fill in the required values.
 
-3. **Run migrations:**
+4. **Run migrations:**
    Initialize your database by executing `poetry run python manage.py migrate`.
 
-4. **Start the development server:**
+5. **Start the development server:**
    Launch the server with `poetry run python manage.py runserver`.
 
 ## Contributing
