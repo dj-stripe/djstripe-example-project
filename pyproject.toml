@@ -9,6 +9,7 @@ authors = ["Jerome Leclanche <jerome@leclan.ch>"]
 [tool.poetry.dependencies]
 python = "^3.9"
 django = "^4.2"
+django-environ = "^0.11.2"
 # Choose between using the latest verion or a local copy
 dj-stripe = {git = "https://github.com/dj-stripe/dj-stripe.git"}
 # dj-stripe = { path = "../dj-stripe" }
