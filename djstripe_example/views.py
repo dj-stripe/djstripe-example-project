@@ -4,7 +4,7 @@ from django.core.exceptions import ImproperlyConfigured
 from django.urls import reverse
 from django.views.generic import RedirectView, TemplateView
 from djstripe.enums import APIKeyType
-from djstripe.models import APIKey, Price, Product
+from djstripe.models import APIKey, Price, Product, TaxRate
 
 stripe.api_key = settings.STRIPE_TEST_SECRET_KEY
 
@@ -31,6 +31,22 @@ def get_or_create_starter_price():
             metadata={"djstripe_example": "starter_price"},
         )
         return Price.sync_from_stripe_data(stripe_price)
+
+
+def get_or_create_tax_rate():
+    try:
+        tax_rate = TaxRate.objects.get(metadata__djstripe_example="example_tax_rate")
+    except TaxRate.DoesNotExist:
+        print("Could not find a tax rate to use. Will create one for you.")
+        stripe_tax_rate = stripe.TaxRate.create(
+            display_name="VAT",
+            description="VAT",
+            inclusive=False,
+            percentage=20,
+            metadata={"djstripe_example": "example_tax_rate"},
+        )
+        tax_rate = TaxRate.sync_from_stripe_data(stripe_tax_rate)
+    return tax_rate
 
 
 class CheckoutRedirectView(TemplateView):
@@ -68,12 +84,13 @@ class CreateCheckoutSession(RedirectView):
 
     def get_redirect_url(self, *args, **kwargs):
         price = get_or_create_starter_price()
+        tax_rate = get_or_create_tax_rate()
 
         checkout_session = stripe.checkout.Session.create(
             success_url="http://localhost:8000/checkout/success/?session_id={CHECKOUT_SESSION_ID}",
             cancel_url="http://localhost:8000/checkout/canceled/",
             mode="subscription",
-            line_items=[{"price": price.id, "quantity": 1}],
+            line_items=[{"price": price.id, "quantity": 1, "tax_rates": [tax_rate.id]}],
             payment_method_types=["card"],
         )
 

@@ -27,5 +27,5 @@ urlpatterns = [
         name="checkout_redirect",
     ),
     path("checkout/create/", create_checkout_session, name="create_checkout_session"),
-    path("stripe/", include("djstripe.urls", namespace="djstripe")),
+    path("djstripe/", include("djstripe.urls", namespace="djstripe")),
 ]
