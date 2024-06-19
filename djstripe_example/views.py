@@ -6,6 +6,9 @@ from django.views.generic import RedirectView, TemplateView
 from djstripe.enums import APIKeyType
 from djstripe.models import APIKey, Price, Product, TaxRate
 
+from django.views import View
+from django.http import JsonResponse
+
 stripe.api_key = settings.STRIPE_TEST_SECRET_KEY
 
 
@@ -101,4 +104,18 @@ class CreateCheckoutSession(RedirectView):
         )
 
 
+class CheckoutSessionSuccessView(View):
+    def get(self, request, *args, **kwargs):
+        session_id = request.GET.get("session_id")
+        if not session_id:
+            return JsonResponse({"error": "No session ID provided."}, status=400)
+
+        try:
+            checkout_session = stripe.checkout.Session.retrieve(session_id)
+            return JsonResponse(checkout_session, safe=False)
+        except stripe.error.StripeError as e:
+            return JsonResponse({"error": str(e)}, status=400)
+
+
 create_checkout_session = CreateCheckoutSession.as_view()
+checkout_session_success = CheckoutSessionSuccessView.as_view()
