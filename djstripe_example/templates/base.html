@@ -1,18 +1,51 @@
+{% load i18n %}
 <!DOCTYPE html>
-<html lang="en">
+{% get_current_language as LANGUAGE_CODE %}
+<html lang="{{ LANGUAGE_CODE }}" data-bs-theme="light">
     <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="Dj-Stripe Example Project">
-        <meta name="author" content="Abe Hanoka">
+        <meta charset="utf-8" />
+        <meta http-equiv="x-ua-compatible" content="ie=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="description" content="Dj-Stripe Example Project" />
+        <meta name="author" content="Abe Hanoka" />
         <meta name="keywords"
-              content="Dj-Stripe, Stripe, Django, Payment Integration">
-        <title>Dj-Stripe Example Project</title>
-        <script src="https://js.stripe.com/v3/"></script>
-        <link rel="stylesheet" href="https://unpkg.com/mvp.css">
+              content="Dj-Stripe, Stripe, Django, Payment Integration" />
+        <title>
+            {% block title %}
+                Dj-Stripe Example Project
+            {% endblock title %}
+        </title>
+        {% block css %}
+            <!-- Bootstrap CSS -->
+            <link rel="stylesheet"
+                  href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css"
+                  integrity="sha512-jnSuA4Ss2PkkikSOLtYs8BlYIeeIK1h99ty4YfvRPAlzr377vr3CXDb7sb7eEEBYjDtcYj+AjBH3FLv5uSJuXg=="
+                  crossorigin="anonymous"
+                  referrerpolicy="no-referrer" />
+            <!-- Bootstrap Icons -->
+            <link rel="stylesheet"
+                  href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css"
+                  integrity="sha512-dPXYcDub/aeb08c63jRq/k6GaKccl256JQy/AnOq7CAnEZ9FzSL9wSbcZkMp4R26vBsMLFYH4kQ67/bbV8XaCQ=="
+                  crossorigin="anonymous"
+                  referrerpolicy="no-referrer" />
+        {% endblock css %}
+        {% block javascript %}
+            <!-- Stripe JS -->
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"
+                    integrity="sha512-7Pi/otdlbbCR+LnW+F7PwFcSDJOuUJB3OxtEHbg4vSMvzvJjde4Po1v4BR9Gdc9aXNUNFVUY+SK51wWT8WF0Gg=="
+                    crossorigin="anonymous"
+                    referrerpolicy="no-referrer"></script>
+            <script src="https://js.stripe.com/v3/"></script>
+        {% endblock javascript %}
     </head>
-    <body>
-        {% block content %}
-        {% endblock content %}
+    <body class="{% block bodyclass %}{% endblock bodyclass %}">
+        {% block body %}
+            <div class="container mt-4">
+                {% block content %}
+                {% endblock content %}
+            </div>
+        {% endblock body %}
+        {% block inline_javascript %}
+        {% endblock inline_javascript %}
     </body>
 </html>

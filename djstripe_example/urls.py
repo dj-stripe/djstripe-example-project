@@ -16,10 +16,13 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import include, path
+from django.views.generic import TemplateView
+
 
 from .views import checkout_redirect, create_checkout_session, checkout_session_success
 
 urlpatterns = [
+    path("", TemplateView.as_view(template_name="home.html"), name="home"),
     path("admin/", admin.site.urls),
     path(
         "checkout/redirect/<str:session_id>",

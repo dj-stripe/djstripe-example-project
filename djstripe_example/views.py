@@ -14,7 +14,9 @@ stripe.api_key = settings.STRIPE_TEST_SECRET_KEY
 
 def get_or_create_starter_price():
     try:
-        product = Product.objects.get(metadata__djstripe_example="example_subscription")
+        product = Product.objects.filter(
+            metadata__djstripe_example="example_subscription"
+        ).first()
     except Product.DoesNotExist:
         print("Could not find a subscription product to use. Will create one for you.")
         stripe_product = stripe.Product.create(
@@ -23,7 +25,7 @@ def get_or_create_starter_price():
         product = Product.sync_from_stripe_data(stripe_product)
 
     try:
-        return Price.objects.get(metadata__djstripe_example="starter_price")
+        return Price.objects.filter(metadata__djstripe_example="starter_price").first()
     except Price.DoesNotExist:
         print("Could not find a subscription price to use. Will create one for you.")
         stripe_price = stripe.Price.create(

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}
+    Home - Dj-Stripe Example Project
+{% endblock title %}
+{% block content %}
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <h1 class="mb-4">Welcome to Dj-Stripe Example Project</h1>
+                <p class="lead mb-4">Easily integrate Stripe with your Django application.</p>
+                <a href="{% url 'create_checkout_session' %}"
+                   class="btn btn-primary btn-lg">
+                    <i class="bi bi-cart"></i> Start Checkout
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
